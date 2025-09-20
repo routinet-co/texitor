@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RazorLangVersion>8.0</RazorLangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
+
+		<!-- Assembly Information -->
+		<Product>Texitor</Product>
+		<Company>Routinet</Company>
+		<Description>A Custom WYSIWYG Editor for ASP.NET Core Without External Dependencies</Description>
+
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<ApplicationVersion>1.0.0.0</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+
+		<!-- NuGet Package -->
+		<GenerateRazorMetadata>true</GenerateRazorMetadata>
+		<RazorCompileOnBuild>true</RazorCompileOnBuild>
+
+		<Authors>ali80da | Ali Darehshori | ali80dev</Authors>
+		<PackageTags>texitor;dotnet;editor;texteditor</PackageTags>
+
+		<!--<RepositoryUrl>https://github.com/</RepositoryUrl>-->
+		<RepositoryType>git</RepositoryType>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+
+
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="icon.png" Pack="true" PackagePath="\" />
+		<None Include="LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="**\*.Tests.cs" />
+		<Compile Include="**\*.Tests.cs" Condition="'$(Configuration)' == 'Debug'">
+			<SubType>Compile</SubType>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	  <Folder Include="Configuration\" />
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
+</Project>
