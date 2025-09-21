@@ -11,7 +11,8 @@
 		<!-- Assembly Information -->
 		<Product>Texitor</Product>
 		<Company>Routinet</Company>
-		<Description>A Custom WYSIWYG Editor for ASP.NET Core Without External Dependencies</Description>
+		<!--<Description>A Custom WYSIWYG Editor for ASP.NET Core Without External Dependencies</Description>-->
+		<Description>Professional WYSIWYG Rich Text Editor Component for ASP.NET Core</Description>
 
 		<Version>1.0.0</Version>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -22,44 +23,84 @@
 		<!-- NuGet Package -->
 		<GenerateRazorMetadata>true</GenerateRazorMetadata>
 		<RazorCompileOnBuild>true</RazorCompileOnBuild>
-
+		<IsPackable>true</IsPackable>
+		
 		<Authors>ali80da | Ali Darehshori | ali80dev</Authors>
 		<PackageTags>texitor;dotnet;editor;texteditor</PackageTags>
 
-		<!--<RepositoryUrl>https://github.com/</RepositoryUrl>-->
+		<PackageReleaseNotes>
+			## 1.0.0
+			- Initial release of Texitor v1.0.0
+			- Complete TagHelper implementation
+			- HTML Sanitization with Ganss.XSS
+			- XSS Protection and Content Validation
+			- Export to HTML, Markdown, Plain Text
+			- Light/Dark/Auto themes support
+			- Keyboard shortcuts and ARIA accessibility
+			- Model Binding and Form Integration
+		</PackageReleaseNotes>
+		
+		<RepositoryUrl>https://github.com/routinet-co/texitor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>icon.png</PackageIcon>
 
+		<!-- Documentation -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<NoWarn>$(NoWarn);1591</NoWarn>
 
-
-
+		<!-- Build Settings -->
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<WarningsAsErrors>MSB3277;MSB3021</WarningsAsErrors>
 
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="HtmlSanitizer" Version="8.1.870" />
+		
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.0" />
+		
+		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+
+		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
 	</ItemGroup>
 
+	
 	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 		<None Include="icon.png" Pack="true" PackagePath="\" />
 		<None Include="LICENSE" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
+	<!-- Exclude Test Files -->
 	<ItemGroup>
 		<Compile Remove="**\*.Tests.cs" />
 		<Compile Include="**\*.Tests.cs" Condition="'$(Configuration)' == 'Debug'">
 			<SubType>Compile</SubType>
 		</Compile>
 	</ItemGroup>
-
 	<ItemGroup>
-	  <Folder Include="Models\" />
 	  <Folder Include="Configuration\" />
+	  <Folder Include="Models\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
+
+
+
+	<!-- Debug Configuration -->
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<WarningsAsErrors />
+	</PropertyGroup>
+
+	<!-- Release Configuration -->
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>pdbonly</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup> 
 
 </Project>
